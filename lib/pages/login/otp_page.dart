@@ -55,7 +55,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
   }
 
 //navigate
-  navigate(verify) {
+  void navigate(verify) {
     if (verify == true) {
       if (userRequestData.isNotEmpty && userRequestData['is_completed'] == 1) {
         Navigator.pushAndRemoveUntil(
@@ -103,7 +103,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
     valueNotifierLogin.incrementNotifier();
   }
 
-  otpFalse() async {
+  Future<void> otpFalse() async {
     if (phoneAuthCheck == false) {
       if (isverifyemail == false) {
         _pinPutController2.text = '123456';
@@ -115,12 +115,12 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
     }
   }
 
-  normallogin() async {
+  Future<void> normallogin() async {
     var verify = await verifyUser(phnumber);
     navigate(verify);
   }
 
-  emaillogin() async {
+  Future<void> emaillogin() async {
     var verify = await verifyUser(phnumber);
     // var register = await registerUser();
     if (verify == false) {
@@ -138,7 +138,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
 
 //auto verify otp
 
-  verifyOtp() async {
+  Future<void> verifyOtp() async {
     FocusManager.instance.primaryFocus?.unfocus();
     try {
       // Sign the user in (or link) with the credential
@@ -157,7 +157,7 @@ class _OtpState extends State<Otp> with TickerProviderStateMixin {
     }
   }
 
-  showToast() {
+  void showToast() {
     setState(() {
       showtoast = true;
     });

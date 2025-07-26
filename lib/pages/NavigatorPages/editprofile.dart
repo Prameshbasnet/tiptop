@@ -38,7 +38,7 @@ class _EditProfileState extends State<EditProfile> {
   bool chooseWorkArea = false;
   String _otperror = '';
 //gallery permission
-  getGalleryPermission() async {
+  Future getGalleryPermission() async {
     dynamic status;
     if (platform == TargetPlatform.android) {
       final androidInfo = await DeviceInfoPlugin().androidInfo;
@@ -65,7 +65,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
 //camera permission
-  getCameraPermission() async {
+  Future<PermissionStatus> getCameraPermission() async {
     var status = await Permission.camera.status;
     if (status != PermissionStatus.granted) {
       status = await Permission.camera.request();
@@ -74,7 +74,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
 //pick image from gallery
-  pickImageFromGallery() async {
+  Future<void> pickImageFromGallery() async {
     var permission = await getGalleryPermission();
     if (permission == PermissionStatus.granted) {
       final pickedFile =
@@ -91,7 +91,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
 //pick image from camera
-  pickImageFromCamera() async {
+  Future<void> pickImageFromCamera() async {
     var permission = await getCameraPermission();
     if (permission == PermissionStatus.granted) {
       final pickedFile =
@@ -108,7 +108,7 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   //navigate pop
-  pop() {
+  void pop() {
     Navigator.pop(context, true);
   }
 
@@ -119,7 +119,7 @@ class _EditProfileState extends State<EditProfile> {
     super.initState();
   }
 
-  countrycode() {
+  void countrycode() {
     firstname.text = userDetails['name'].toString().split(' ')[0];
     lastname.text = (userDetails['name'].toString().split(' ').length > 1)
         ? userDetails['name'].toString().split(' ')[1]

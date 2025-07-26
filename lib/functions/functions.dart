@@ -57,6 +57,7 @@ mapkey = 'AIzaSyAgkrbxMx1FWZV7ZvhX0bBDGQqfRrTFuLY';
 
 //check internet connection
 
+void
 checkInternetConnection() {
   Connectivity().onConnectivityChanged.listen(
     (
@@ -76,6 +77,9 @@ checkInternetConnection() {
   );
 }
 
+Future<
+  void
+>
 getDetailsOfDevice() async {
   var connectivityResult = await (Connectivity().checkConnectivity());
   if (connectivityResult ==
@@ -131,6 +135,7 @@ locationSettings =
         distanceFilter: 50,
       );
 
+void
 positionStreamData() {
   positionStream =
       Geolocator.getPositionStream(
@@ -163,6 +168,7 @@ positionStreamData() {
 
 //validate email already exist
 
+Future
 validateEmail(
   email,
 ) async {
@@ -463,6 +469,7 @@ languagesCode = [
 
 List
 countries = [];
+Future
 getCountryCode() async {
   dynamic result;
   try {
@@ -526,6 +533,9 @@ phoneAuthCheck = false;
 dynamic
 credentials;
 
+Future<
+  void
+>
 phoneAuth(
   String phone,
 ) async {
@@ -580,6 +590,7 @@ phoneAuth(
 String
 lastNotification = '';
 
+Future
 getLocalData() async {
   dynamic result;
   bearerToken.clear;
@@ -716,6 +727,7 @@ bearerToken =
       BearerClass
     >[];
 
+Future
 registerUser() async {
   bearerToken.clear();
   dynamic result;
@@ -827,6 +839,7 @@ registerUser() async {
 
 //update referral code
 
+Future
 updateReferral() async {
   dynamic result;
   try {
@@ -879,6 +892,7 @@ updateReferral() async {
 
 //call firebase otp
 
+Future
 otpCall() async {
   dynamic result;
   try {
@@ -904,6 +918,7 @@ otpCall() async {
 
 // verify user already exist
 
+Future
 verifyUser(
   String number,
 ) async {
@@ -1000,6 +1015,7 @@ verifyUser(
   }
 }
 
+Future
 acceptRequest(
   body,
 ) async {
@@ -1043,6 +1059,7 @@ acceptRequest(
 }
 
 //user login
+Future
 userLogin() async {
   bearerToken.clear();
   dynamic result;
@@ -1131,6 +1148,7 @@ tripStops = [];
 List
 banners = [];
 //user current state
+Future
 getUserDetails() async {
   dynamic result;
   try {
@@ -1555,6 +1573,7 @@ audioPlayers = AudioPlayer();
 var pickupAddress = '';
 var dropAddress = '';
 
+Future
 geoCoding(
   double lat,
   double lng,
@@ -1601,6 +1620,9 @@ geoCoding(
 }
 
 //Generate Short Name Instead of large names
+Future<
+  String
+>
 geoCodingShortName(
   double lat,
   double lng,
@@ -1689,6 +1711,7 @@ geoCodingShortName(
 }
 
 //lang
+Future
 getlangid() async {
   dynamic result;
   try {
@@ -1765,6 +1788,9 @@ storedAutoAddress = [];
 List
 addAutoFill = [];
 
+Future<
+  void
+>
 getAutoAddress(
   input,
   sessionToken,
@@ -1840,6 +1866,9 @@ getAutoAddress(
 
 //geocodeing location
 
+Future<
+  LatLng
+>
 geoCodingForLatLng(
   placeid,
 ) async {
@@ -1855,16 +1884,20 @@ geoCodingForLatLng(
       var val = jsonDecode(
         response.body,
       )['result']['geometry']['location'];
-      center = LatLng(
+      var location = LatLng(
         val['lat'],
         val['lng'],
       );
+      return location;
     } else {
       debugPrint(
         response.body,
       );
+      return const LatLng(
+        0.0,
+        0.0,
+      );
     }
-    return center;
   } catch (
     e
   ) {
@@ -1872,6 +1905,11 @@ geoCodingForLatLng(
         is SocketException) {
       internet = false;
     }
+    // Return a default LatLng in case of error
+    return const LatLng(
+      0.0,
+      0.0,
+    );
   }
 }
 
@@ -1906,6 +1944,11 @@ List<
 >
 polyList = [];
 
+Future<
+  List<
+    LatLng
+  >
+>
 getPolylines() async {
   polyList.clear();
   String pickLat = '';
@@ -2142,11 +2185,6 @@ class PointLatLng {
   )
     // ignore: unnecessary_null_comparison
     : assert(
-        latitude !=
-            null,
-      ),
-      // ignore: unnecessary_null_comparison
-      assert(
         longitude !=
             null,
       ),
@@ -2171,6 +2209,7 @@ class PointLatLng {
 List
 goodsTypeList = [];
 
+Future
 getGoodsList() async {
   dynamic result;
   goodsTypeList.clear();
@@ -2253,6 +2292,7 @@ etaDetails = [];
 
 //eta request
 
+Future
 etaRequest() async {
   dynamic result;
   try {
@@ -2491,6 +2531,7 @@ etaRequest() async {
   }
 }
 
+Future
 etaRequestWithPromo() async {
   dynamic result;
   // etaDetails.clear();
@@ -2696,6 +2737,7 @@ etaRequestWithPromo() async {
 
 //rental eta request
 
+Future
 rentalEta() async {
   dynamic result;
   try {
@@ -2769,6 +2811,7 @@ rentalEta() async {
   }
 }
 
+Future
 rentalRequestWithPromo() async {
   dynamic result;
   try {
@@ -2849,6 +2892,7 @@ rentalRequestWithPromo() async {
 
 //calculate distance
 
+double
 calculateDistance(
   lat1,
   lon1,
@@ -2898,6 +2942,7 @@ userRequestData = {};
 
 //create request
 
+Future
 createRequest(
   value,
   api,
@@ -2956,6 +3001,7 @@ createRequest(
 
 //create request
 
+Future
 createRequestLater(
   val,
   api,
@@ -3010,6 +3056,7 @@ createRequestLater(
 
 //create request with promo code
 
+Future
 createRequestLaterPromo() async {
   dynamic result;
   try {
@@ -3151,6 +3198,7 @@ createRequestLaterPromo() async {
 
 //create rental request
 
+Future
 createRentalRequest() async {
   dynamic result;
   try {
@@ -3259,6 +3307,7 @@ createRentalRequest() async {
   return result;
 }
 
+Future
 createRentalRequestWithPromo() async {
   dynamic result;
   try {
@@ -3369,6 +3418,7 @@ createRentalRequestWithPromo() async {
   return result;
 }
 
+Future
 createRentalRequestLater() async {
   dynamic result;
   try {
@@ -3477,6 +3527,7 @@ createRentalRequestLater() async {
   return result;
 }
 
+Future
 createRentalRequestLaterPromo() async {
   dynamic result;
   try {
@@ -3644,6 +3695,7 @@ class RequestCreate {
 
 //user cancel request
 
+Future
 cancelRequest() async {
   dynamic result;
   try {
@@ -3716,6 +3768,7 @@ cancelRequest() async {
   return result;
 }
 
+Future
 cancelLaterRequest(
   val,
 ) async {
@@ -3771,6 +3824,7 @@ cancelLaterRequest(
 
 //user cancel request with reason
 
+Future
 cancelRequestWithReason(
   reason,
 ) async {
@@ -3837,6 +3891,9 @@ cancelRequestWithReason(
 
 //making call to user
 
+Future<
+  void
+>
 makingPhoneCall(
   phnumber,
 ) async {
@@ -3857,6 +3914,7 @@ makingPhoneCall(
 //cancellation reason
 List
 cancelReasonsList = [];
+Future
 cancelReason(
   reason,
 ) async {
@@ -3930,6 +3988,7 @@ class CancelReasonJson {
 
 //add user rating
 
+Future
 userRating() async {
   dynamic result;
   try {
@@ -4010,6 +4069,7 @@ class NearByDriver {
 
 //add favourites location
 
+Future
 addFavLocation(
   lat,
   lng,
@@ -4064,6 +4124,7 @@ addFavLocation(
 List
 sosData = [];
 
+Future
 getSosData(
   lat,
   lng,
@@ -4110,6 +4171,9 @@ getSosData(
 
 //sos admin notification
 
+Future<
+  bool
+>
 notifyAdmin() async {
   var db = FirebaseDatabase.instance.ref();
   try {
@@ -4142,6 +4206,7 @@ notifyAdmin() async {
 List
 chatList = [];
 
+Future
 getCurrentMessages() async {
   dynamic result;
   try {
@@ -4208,6 +4273,7 @@ getCurrentMessages() async {
 
 //send chat
 
+Future
 sendMessage(
   chat,
 ) async {
@@ -4263,6 +4329,9 @@ sendMessage(
 
 //message seen
 
+Future<
+  void
+>
 messageSeen() async {
   var response = await http.post(
     Uri.parse(
@@ -4294,6 +4363,9 @@ dynamic
 chatStream;
 String
 unSeenChatCount = '0';
+Future<
+  void
+>
 streamAdminchat() async {
   chatStream = FirebaseDatabase.instance
       .ref()
@@ -4350,6 +4422,7 @@ dynamic
 isnewchat = 1;
 dynamic
 chatid;
+Future
 getadminCurrentMessages() async {
   dynamic result;
   try {
@@ -4401,6 +4474,7 @@ getadminCurrentMessages() async {
   }
 }
 
+Future
 sendadminMessage(
   chat,
 ) async {
@@ -4479,6 +4553,7 @@ sendadminMessage(
   }
 }
 
+Future
 adminmessageseen() async {
   dynamic result;
   try {
@@ -4518,6 +4593,7 @@ adminmessageseen() async {
 
 //add sos
 
+Future
 addSos(
   name,
   number,
@@ -4567,6 +4643,7 @@ addSos(
 
 //remove sos
 
+Future
 deleteSos(
   id,
 ) async {
@@ -4608,6 +4685,9 @@ deleteSos(
 
 //open url in browser
 
+Future<
+  void
+>
 openBrowser(
   browseUrl,
 ) async {
@@ -4633,6 +4713,7 @@ Map<
 >
 myFaqPage = {};
 
+Future
 getFaqData(
   lat,
   lng,
@@ -4679,6 +4760,7 @@ getFaqData(
   return result;
 }
 
+Future
 getFaqPages(
   id,
 ) async {
@@ -4735,6 +4817,7 @@ getFaqPages(
 
 //remove fav address
 
+Future
 removeFavAddress(
   id,
 ) async {
@@ -4781,6 +4864,7 @@ Map<
   dynamic
 >
 myReferralCode = {};
+Future
 getReferral() async {
   dynamic result;
   try {
@@ -4823,6 +4907,7 @@ getReferral() async {
 
 //user logout
 
+Future
 userLogout() async {
   dynamic result;
   try {
@@ -4872,6 +4957,7 @@ Map<
 >
 myHistoryPage = {};
 
+Future
 getHistory(
   id,
 ) async {
@@ -4920,6 +5006,7 @@ getHistory(
   return result;
 }
 
+Future
 getHistoryPages(
   id,
 ) async {
@@ -4998,6 +5085,7 @@ walletPages = {};
 //   pattern.allMatches(text).forEach((match) => debugPrint(match.group(0)));
 // }
 
+Future
 getWalletHistory() async {
   dynamic result;
   try {
@@ -5044,6 +5132,7 @@ getWalletHistory() async {
   return result;
 }
 
+Future
 getWalletHistoryPage(
   page,
 ) async {
@@ -5101,6 +5190,7 @@ getWalletHistoryPage(
 
 //get client token for braintree
 
+Future
 getClientToken() async {
   dynamic result;
   try {
@@ -5144,6 +5234,7 @@ Map<
 >
 stripeToken = {};
 
+Future
 getStripePayment(
   money,
 ) async {
@@ -5192,6 +5283,7 @@ getStripePayment(
 
 //stripe add money
 
+Future
 addMoneyStripe(
   amount,
   nonce,
@@ -5242,6 +5334,7 @@ addMoneyStripe(
 
 //stripe pay money
 
+Future
 payMoneyStripe(
   nonce,
 ) async {
@@ -5293,6 +5386,7 @@ Map<
 >
 paystackCode = {};
 
+Future
 getPaystackPayment(
   body,
 ) async {
@@ -5347,6 +5441,7 @@ getPaystackPayment(
   return results;
 }
 
+Future
 addMoneyPaystack(
   amount,
   nonce,
@@ -5398,6 +5493,7 @@ addMoneyPaystack(
 
 //flutterwave
 
+Future
 addMoneyFlutterwave(
   amount,
   nonce,
@@ -5448,6 +5544,7 @@ addMoneyFlutterwave(
 
 //razorpay
 
+Future
 addMoneyRazorpay(
   amount,
   nonce,
@@ -5504,6 +5601,7 @@ Map<
 >
 cftToken = {};
 
+Future
 getCfToken(
   money,
   currency,
@@ -5570,6 +5668,7 @@ Map<
 >
 cfSuccessList = {};
 
+Future
 cashFreePaymentSuccess() async {
   dynamic result;
   try {
@@ -5632,6 +5731,7 @@ cashFreePaymentSuccess() async {
 
 //edit user profile
 
+Future
 updateProfile(
   name,
   email,
@@ -5715,6 +5815,7 @@ updateProfile(
   return result;
 }
 
+Future
 updateProfileWithoutImage(
   name,
   email,
@@ -5790,6 +5891,7 @@ updateProfileWithoutImage(
 }
 
 //internet true
+void
 internetTrue() {
   internet = true;
   valueNotifierHome.incrementNotifier();
@@ -5799,6 +5901,7 @@ internetTrue() {
 
 List
 generalComplaintList = [];
+Future
 getGeneralComplaint(
   type,
 ) async {
@@ -5839,6 +5942,7 @@ getGeneralComplaint(
   return result;
 }
 
+Future
 makeGeneralComplaint(
   complaintDesc,
 ) async {
@@ -5883,6 +5987,7 @@ makeGeneralComplaint(
   return result;
 }
 
+Future
 makeRequestComplaint() async {
   dynamic result;
   try {
@@ -5938,6 +6043,7 @@ requestStreamEnd;
 bool
 userCancelled = false;
 
+void
 streamRequest() {
   requestStreamEnd?.cancel();
   requestStreamStart?.cancel();
@@ -5984,6 +6090,7 @@ StreamSubscription<
 >?
 rideStreamUpdate;
 
+void
 streamRide() {
   requestStreamEnd?.cancel();
   requestStreamStart?.cancel();
@@ -6060,6 +6167,7 @@ streamRide() {
       );
 }
 
+Future
 userDelete() async {
   dynamic result;
   try {
@@ -6109,6 +6217,7 @@ Map<
 >
 notificationHistoryPage = {};
 
+Future
 getnotificationHistory() async {
   dynamic result;
 
@@ -6155,6 +6264,7 @@ getnotificationHistory() async {
   return result;
 }
 
+Future
 getNotificationPages(
   id,
 ) async {
@@ -6214,6 +6324,7 @@ getNotificationPages(
 }
 
 //delete notification
+Future
 deleteNotification(
   id,
 ) async {
@@ -6256,6 +6367,7 @@ deleteNotification(
   return result;
 }
 
+Future
 sharewalletfun({
   mobile,
   role,
@@ -6315,6 +6427,7 @@ sharewalletfun({
   return result;
 }
 
+Future
 sendOTPtoEmail(
   String email,
 ) async {
@@ -6353,6 +6466,7 @@ sendOTPtoEmail(
   }
 }
 
+Future
 emailVerify(
   String email,
   otpNumber,
@@ -6393,6 +6507,7 @@ emailVerify(
   }
 }
 
+Future
 paymentMethod(
   payment,
 ) async {
@@ -6464,6 +6579,7 @@ String
 isemailmodule = '1';
 String
 translationMode = '1';
+Future
 getemailmodule() async {
   dynamic res;
   try {
@@ -6518,6 +6634,7 @@ Map<
 cardManagementDetails = {};
 List
 cardManagementPaymentMethods = [];
+Future
 getCardManagementDetails() async {
   dynamic result;
 
@@ -6564,6 +6681,7 @@ getCardManagementDetails() async {
 
 //stripe payment Intent For Card Management
 
+Future
 getStripePaymentIntentForCardManagement() async {
   dynamic results;
   try {
@@ -6607,6 +6725,7 @@ getStripePaymentIntentForCardManagement() async {
 }
 
 //stripe return money
+Future
 returnMoneyStripe(
   nonce,
 ) async {
@@ -6656,6 +6775,7 @@ returnMoneyStripe(
 
 //stripe remve card
 
+Future
 removeStripeCard(
   nonce,
 ) async {
@@ -6705,6 +6825,7 @@ removeStripeCard(
 }
 
 //stripe pay money
+Future
 ChargeSavedCardForStripe([
   String? paymentMethodId,
 ]) async {
@@ -6765,6 +6886,7 @@ List<
   dynamic
 >
 FortuneWheelItems = [];
+Future
 GetFortuneWheelItems() async {
   dynamic result;
 
@@ -6815,6 +6937,7 @@ Map<
 >
 FortuneWheelSpinResult = {};
 var FortuneWheelSpinErrorMessage = "";
+Future
 getFortuneWheelSpinResult() async {
   dynamic result;
 
@@ -6916,6 +7039,7 @@ convertPointsToDollars(
 }
 
 // Reward Points History
+Future
 getRewardPointHistory({
   page = 1,
 }) async {
@@ -6989,6 +7113,7 @@ getRewardPointHistory({
 
 var RewardPointRedeemErrorMessage = "";
 // Redeem Reward Points
+Future
 redeemRewardPoints(
   points,
 ) async {
@@ -7071,6 +7196,7 @@ List<
 >
 dailyQuizList = [];
 
+Future
 GetDailyQuizList() async {
   dynamic result;
 
@@ -7122,6 +7248,7 @@ Map<
 >
 dailyQuizData = {};
 
+Future
 GetDailyQuizQuestions(
   id,
 ) async {
@@ -7171,6 +7298,7 @@ GetDailyQuizQuestions(
   return result;
 }
 
+Future
 submitDailyQuizQuestionAnswer(
   quizId,
   questionId,
@@ -7228,6 +7356,7 @@ Map<
 >
 QuizSettingsData = {};
 
+Future
 GetQuizSettings() async {
   dynamic result;
 
@@ -7272,6 +7401,7 @@ GetQuizSettings() async {
   return result;
 }
 
+Future
 ClaimBonusRewardPoints() async {
   dynamic result;
 

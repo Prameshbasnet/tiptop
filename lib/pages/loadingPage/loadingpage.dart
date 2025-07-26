@@ -40,7 +40,7 @@ class _LoadingPageState extends State<LoadingPage> {
   }
 
   //navigate
-  navigate() {
+  void navigate() {
     if (userRequestData.isNotEmpty && userRequestData['is_completed'] == 1) {
       //invoice page of ride
       Navigator.pushAndRemoveUntil(
@@ -73,14 +73,14 @@ class _LoadingPageState extends State<LoadingPage> {
     }
   }
 
-  getData() async {
+  Future<void> getData() async {
     for (var i = 0; _error == true; i++) {
       await getLanguageDone();
     }
   }
 
 //get language json and data saved in local (bearer token , choosen language) and find users current status
-  getLanguageDone() async {
+  Future<void> getLanguageDone() async {
     _package = await PackageInfo.fromPlatform();
     try {
       if (platform == TargetPlatform.android) {

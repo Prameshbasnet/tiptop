@@ -28,7 +28,7 @@ class _FaqState extends State<Faq> {
     super.initState();
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const Login()),
@@ -36,7 +36,7 @@ class _FaqState extends State<Faq> {
   }
 
 //get faq data
-  faqDatas() async {
+  Future<void> faqDatas() async {
     if (currentLocation != null) {
       await getFaqData(currentLocation.latitude, currentLocation.longitude);
       setState(() {

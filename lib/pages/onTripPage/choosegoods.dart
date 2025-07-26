@@ -30,7 +30,7 @@ class _ChooseGoodsState extends State<ChooseGoods> {
     super.initState();
   }
 
-  getGoods() async {
+  Future<void> getGoods() async {
     await getGoodsList();
     setState(() {
       _isLoading = false;

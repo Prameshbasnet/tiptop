@@ -50,13 +50,13 @@ class _PickContactState
   }
 
   //get contact permission
-  getContactPermission() async {
+  Future<PermissionStatus> getContactPermission() async {
     var status = await Permission.contacts.status;
     return status;
   }
 
   //fetch contact data
-  getContact() async {
+  Future<void> getContact() async {
     if (contacts.isEmpty) {
       var permission = await getContactPermission();
       if (permission ==
@@ -115,14 +115,14 @@ class _PickContactState
 
   //navigate pop
 
-  pop() {
+  void pop() {
     Navigator.pop(
       context,
       true,
     );
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(

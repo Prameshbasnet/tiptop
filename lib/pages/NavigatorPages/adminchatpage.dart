@@ -28,7 +28,7 @@ class _AdminChatPageState extends State<AdminChatPage> {
     super.initState();
   }
 
-  getmessage() async {
+  Future<void> getmessage() async {
     adminChatList.clear();
     if (chatid != null && unSeenChatCount != '0') {
       adminmessageseen();

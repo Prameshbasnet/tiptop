@@ -35,7 +35,7 @@ class _CardManagementState extends State<CardManagement> {
   }
 
 //get Card Management details
-  getCardList() async {
+  Future<void> getCardList() async {
     var val = await getCardManagementDetails();
     debugPrint(val);
     if (val == 'success') {
@@ -54,7 +54,7 @@ class _CardManagementState extends State<CardManagement> {
     }
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const Login()),

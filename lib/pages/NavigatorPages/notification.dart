@@ -36,7 +36,7 @@ class _NotificationPageState
     super.initState();
   }
 
-  getdata() async {
+  Future<void> getdata() async {
     var val = await getnotificationHistory();
     if (val ==
         'success') {
@@ -46,7 +46,7 @@ class _NotificationPageState
     }
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -63,7 +63,7 @@ class _NotificationPageState
 
   bool showToastbool = false;
 
-  showToast() async {
+  Future<void> showToast() async {
     setState(
       () {
         showToastbool = true;

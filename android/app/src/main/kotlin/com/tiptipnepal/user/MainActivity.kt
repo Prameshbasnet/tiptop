@@ -1,4 +1,4 @@
-package com.example.tiptop
+package com.tiptipnepal.user
 
 import io.flutter.embedding.android.FlutterActivity
 

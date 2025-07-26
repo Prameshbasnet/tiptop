@@ -52,7 +52,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
     super.initState();
   }
 
-  countryCode() async {
+  Future<void> countryCode() async {
     isverifyemail = false;
     isLoginemail = false;
     isfromomobile = true;
@@ -69,7 +69,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
   }
 
   //navigate
-  navigate() {
+  void navigate() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const Otp()));
   }

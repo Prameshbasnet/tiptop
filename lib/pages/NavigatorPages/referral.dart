@@ -32,7 +32,7 @@ class _ReferralPageState extends State<ReferralPage> {
   }
 
 //get referral code
-  _getReferral() async {
+  Future<void> _getReferral() async {
     await getReferral();
     _package = await PackageInfo.fromPlatform();
     androidUrl = 'android - '
@@ -45,7 +45,7 @@ class _ReferralPageState extends State<ReferralPage> {
   }
 
 //show toast for copied
-  showToast() {
+  void showToast() {
     setState(() {
       _showToast = true;
     });

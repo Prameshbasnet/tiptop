@@ -36,7 +36,7 @@ class _NamePageState extends State<NamePage> {
     super.initState();
   }
 
-  showToast() {
+  void showToast() {
     setState(() {
       showtoast = true;
     });

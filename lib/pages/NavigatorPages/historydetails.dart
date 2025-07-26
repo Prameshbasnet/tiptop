@@ -32,7 +32,7 @@ class _HistoryDetailsState extends State<HistoryDetails> {
 
   bool _showOptions = false;
 
-  getData() async {
+  Future<void> getData() async {
     setState(() {
       complaintType = 0;
       complaintDesc = '';

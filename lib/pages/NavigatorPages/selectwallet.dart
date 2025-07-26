@@ -38,7 +38,7 @@ class _SelectWalletState
   bool _success = false;
   bool _failed = false;
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(

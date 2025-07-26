@@ -32,7 +32,7 @@ class _HistoryState extends State<History> {
   }
 
 //get history datas
-  _getHistory() async {
+  Future<void> _getHistory() async {
     setState(() {
       myHistoryPage.clear();
       myHistory.clear();

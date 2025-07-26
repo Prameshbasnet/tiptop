@@ -49,7 +49,7 @@ class _AddNewCardState
     super.initState();
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(

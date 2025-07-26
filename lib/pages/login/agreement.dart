@@ -17,7 +17,7 @@ class AggreementPage extends StatefulWidget {
 
 class _AggreementPageState extends State<AggreementPage> {
   //navigate
-  navigate() {
+  void navigate() {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const Referral()),

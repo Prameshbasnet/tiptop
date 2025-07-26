@@ -33,7 +33,7 @@ class _MakeComplaintState extends State<MakeComplaint> {
     super.initState();
   }
 
-  getData() async {
+  Future<void> getData() async {
     setState(() {
       complaintType = 0;
       complaintDesc = '';

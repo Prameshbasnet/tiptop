@@ -8,49 +8,92 @@ import 'functions/functions.dart';
 import 'functions/notifications.dart';
 import 'pages/loadingPage/loadingpage.dart';
 
-void main() async {
+Future<
+  void
+>
+main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
   );
-  checkInternetConnection();
-  initMessaging();
-  runApp(const MyApp());
+  bool firebaseReady = false;
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    firebaseReady = true;
+  } catch (
+    e
+  ) {
+    // Firebase init failed, continue for UI only
+    debugPrint(
+      'Firebase init failed: $e',
+    );
+  }
+  try {
+    checkInternetConnection();
+    if (firebaseReady) {
+      await initMessaging();
+    }
+  } catch (
+    e
+  ) {
+    debugPrint(
+      'InitMessaging or checkInternetConnection failed: $e',
+    );
+  }
+  runApp(
+    const MyApp(),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp
+    extends
+        StatelessWidget {
+  const MyApp({
+    super.key,
+  });
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    platform = Theme.of(context).platform;
+  Widget build(
+    BuildContext context,
+  ) {
+    platform = Theme.of(
+      context,
+    ).platform;
     return GestureDetector(
       onTap: () {
-        //remove keyboard on touching anywhere on the screen.
-        FocusScopeNode currentFocus = FocusScope.of(context);
-
-        if (!currentFocus.hasPrimaryFocus) {
+        final currentFocus = FocusScope.of(
+          context,
+        );
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild !=
+                null) {
           currentFocus.unfocus();
-          FocusManager.instance.primaryFocus?.unfocus();
         }
       },
       child: ValueListenableBuilder(
-          valueListenable: valueNotifierBook.value,
-          builder: (context, value, child) {
-            return ToastificationWrapper(
-              child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: productName,
-                theme: ThemeData(),
-                home: const LoadingPage(),
-              ),
-            );
-          }),
+        valueListenable: valueNotifierBook.value,
+        builder:
+            (
+              context,
+              value,
+              child,
+            ) {
+              return ToastificationWrapper(
+                child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: productName,
+                  theme: ThemeData(),
+                  home: const LoadingPage(),
+                ),
+              );
+            },
+      ),
     );
   }
 }

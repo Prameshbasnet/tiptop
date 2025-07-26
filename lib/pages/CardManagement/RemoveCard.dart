@@ -21,7 +21,7 @@ class _RemoveCardState extends State<RemoveCard> {
 
   _RemoveCardState({required this.cardDetail});
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const Login()),

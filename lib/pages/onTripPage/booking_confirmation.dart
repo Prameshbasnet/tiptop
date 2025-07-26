@@ -147,7 +147,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
   }
 
   //get Card Management details
-  getCardList() async {
+  Future<void> getCardList() async {
     setState(() {
       _isLoading = false;
     });
@@ -365,7 +365,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
   // }
 
 //running timer
-  timer() {
+  void timer() {
     if (userRequestData['is_bid_ride'] == 1) {
       timers = Timer.periodic(const Duration(seconds: 1), (timer) {
         valueNotifierTimer.incrementNotifier();
@@ -411,7 +411,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
 
 //create icon
 
-  _capturePng(GlobalKey iconKeys) async {
+  Future _capturePng(GlobalKey iconKeys) async {
     dynamic bitmap;
 
     try {
@@ -429,7 +429,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
     return bitmap;
   }
 
-  addDropMarker() async {
+  Future<void> addDropMarker() async {
     for (var i = 1; i < addressList.length; i++) {
       var testIcon = await _capturePng(iconDropKeys[i]);
       if (testIcon != null) {
@@ -565,7 +565,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
     }
   }
 
-  addMarker() async {
+  Future<void> addMarker() async {
     var testIcon = await _capturePng(iconKey);
     if (testIcon != null) {
       setState(() {
@@ -583,7 +583,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
   }
 
 //add distance marker
-  addDistanceMarker(length) async {
+  Future<void> addDistanceMarker(length) async {
     var testIcon = await _capturePng(iconDistanceKey);
     if (testIcon != null) {
       setState(() {
@@ -598,7 +598,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
     }
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const Login()),
@@ -606,7 +606,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
   }
 
 //add drop marker
-  addPickDropMarker() async {
+  Future<void> addPickDropMarker() async {
     // Simulate some delay for demonstration purposes
     await Future.delayed(const Duration(milliseconds: 500));
 
@@ -714,7 +714,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
   }
 
 //get location permission and location details
-  getLocs() async {
+  Future<void> getLocs() async {
     setState(() {
       _center = (userRequestData.isEmpty)
           ? addressList.firstWhere((element) => element.type == 'pickup').latlng
@@ -10087,7 +10087,7 @@ class _BookingConfirmationState extends State<BookingConfirmation>
     return -1;
   }
 
-  animateCar(
+  Future<void> animateCar(
       double fromLat, //Starting latitude
 
       double fromLong, //Starting longitude

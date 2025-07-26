@@ -37,7 +37,7 @@ class _NavPageState
         State<
           NavPage
         > {
-  darkthemefun() async {
+  Future<void> darkthemefun() async {
     if (isDarkTheme) {
       isDarkTheme = false;
       page = Colors.white;

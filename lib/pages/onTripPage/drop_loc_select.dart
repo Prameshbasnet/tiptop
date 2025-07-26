@@ -88,7 +88,7 @@ class _DropLocationState extends State<DropLocation>
     super.dispose();
   }
 
-  getLocs() async {
+  Future<void> getLocs() async {
     permission = await location.hasPermission();
 
     if (permission == PermissionStatus.denied ||
@@ -177,14 +177,14 @@ class _DropLocationState extends State<DropLocation>
     }
   }
 
-  navigateLogout() {
+  void navigateLogout() {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => const Login()),
         (route) => false);
   }
 
-  popFunction() {
+  bool popFunction() {
     if (_getDropDetails == true) {
       return false;
     } else {

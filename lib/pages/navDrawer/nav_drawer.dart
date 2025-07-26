@@ -25,7 +25,7 @@ class NavDrawer extends StatefulWidget {
 }
 
 class _NavDrawerState extends State<NavDrawer> {
-  darkthemefun() async {
+  Future<void> darkthemefun() async {
     if (isDarkTheme) {
       isDarkTheme = false;
       page = Colors.white;

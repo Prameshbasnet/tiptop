@@ -21,7 +21,7 @@ class _LanguagesState extends State<Languages> {
   }
 
 //navigate
-  navigate() {
+  void navigate() {
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const Login()));
   }
